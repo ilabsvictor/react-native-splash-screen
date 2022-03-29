@@ -44,6 +44,18 @@ RCT_EXPORT_MODULE(SplashScreen)
     [rootView addSubview:loadingView];
 }
 
++ (void)showSplashView:(UIView *)splashView inRootView:(UIView*)rootView {
+    if (!loadingView) {
+        loadingView = splashView;
+        CGRect frame = rootView.frame;
+        frame.origin = CGPointMake(0, 0);
+        loadingView.frame = frame;
+    }
+    waiting = false;
+    
+    [rootView addSubview:loadingView];
+}
+
 + (void)hide {
     if (waiting) {
         dispatch_async(dispatch_get_main_queue(), ^{
